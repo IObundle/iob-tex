@@ -1,0 +1,11 @@
+{signal: [
+  {name: 'i2s_bclk', wave: 'n....|...|.....|...|..'},
+  {name: 'i2s_data', wave: 'x.333|33x|..333|33x|..', data: ['Ln-1', 'Ln-2', '', 'L1', 'L0', 'Rn-1', 'Rn-2', '', 'R1', 'R0']},
+  {name: 'i2s_lrclk', wave: '10...|...|.1...|...|.0', node: '.a.........b.........c'},
+  {name: '', node:                                          '.a.........b.........c'},
+  {name: '', node:                                          '.e...................f'}
+],
+edge: [
+    'b<->a left channel (32 bits), n=16 or 24 bits', 'b<->c right channel (32 bits), n=16 or 24 bits',
+    'e<->f sample period = 1/f_sample']
+}

@@ -1,0 +1,17 @@
+{
+signal: [
+  {name: 'out_clk',           wave: 'p....|.....|.....|'},
+  {name: 'i2s_lrclk',         wave: '0.1|.0|.1|.0|.1|.0|', node: '..p...........r', phase:1.3},
+  {name: 'out_valid',         wave: '0.1..|..0..|..1..|', node: '..q...........s'},
+  {name: 'out_frame_start',   wave: '0.10.|.....|..10.|'},
+  {name: 'out_bitrate',       wave: 'x.2x.|.....|..2x.|', data: ['BR', 'BR']},
+  {name: 'out_data (byte #)', wave: 'x.333|.34..|..333|', data: ['0', '1', '', 'N-1', '', '0','1'], node: '..t.....u.....v'},
+  {name: 'out_frame_end',     wave: '0....|.10..|.....|'},
+  {name: '',  node: '..a.....b.....c......'},
+  {name: '',  node: '..d...........e......', phase:1.3}],
+edge: [
+  'a-b bitstream data for N byte encoded frame', 'b-c frame data stuffing',
+  'd-e frame duration: 576 samples (32 and 64kbps bitrates) or 1152 samples (other bitrates)',
+  'p-|->q sync', 'r-|->s sync', 't-a', 'u-b', 'v-c', 'p-d', 'r-e'
+]
+}
