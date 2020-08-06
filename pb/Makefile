@@ -7,8 +7,7 @@ pb.pdf: pb.tex iob_pb.cls figures/*.odg
 	pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 
 clean:
-	rm $(addprefix pb, .aux .out .log)
-	@rm -f *~
+	@rm -f *~ *.aux *.out *.log
 	make -C figures clean
 
 pdfclean: clean
