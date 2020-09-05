@@ -1,9 +1,7 @@
 #!/bin/bash
 
-COMPILE_SERVER=$1
-HW_DIR=$2
-INTEL=$3
-XILINX=$4
+#COMPILE_SERVER=$1
+HW_DIR=$REMOTE_ROOT_DIR/hardware
 
 echo $COMPILE_SERVER
 #altera

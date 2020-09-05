@@ -1,20 +1,16 @@
 include $(ROOT_DIR)/core.mk
 
-IOB_TEX:=$(ROOT_DIR)/submodules/TEX
-
-INTEL = 1
-XILINX = 1
-
 pb: pb.pdf
 
 ug: ug.pdf
+
+EXPORT_LIST:=COMPILE_SERVER=$(COMPILE_SERVER)  REMOTE_ROOT_DIR=$(REMOTE_ROOT_DIR) INTEL=$(INTEL) XILINX=$(XILINX)
 
 figures:
 	make -C ../figures
 
 fpga:
-	export ROOT_DIR
-	../fpga2tex.sh $(COMPILE_SERVER) $(REMOTE_ROOT_DIR)/$(HW_DIR) $(INTEL) $(XILINX)
+	$(EXPORT_LIST) $(TEX_DIR)/document/fpga2tex.sh
 
 clean:
 	@rm -f *~ *.aux *.out *.log *.summary *_results*
