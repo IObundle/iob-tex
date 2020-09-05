@@ -1,4 +1,3 @@
-%\documentclass[twocolumn]{pb}
 \documentclass[twocolumn]{../../submodules/TEX/document/pb/pb}
 
 %Params
@@ -30,7 +29,10 @@ keepaspectratio]{bg.png}%
 }}}
 
 
-\input{../color}
+
+\getenv[\DOC]{DOC_DIR}
+
+\input{\DOC/color}
 
 \begin{document}
 \AddToShipoutPicture*{\BackgroundPic}

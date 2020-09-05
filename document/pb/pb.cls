@@ -10,6 +10,7 @@
 %\RequirePackage{geometry}
 \RequirePackage{enumitem}
 \RequirePackage{titlesec}
+\RequirePackage{catchfile}
 
 \setitemize{labelindent=2mm,labelsep=1mm,leftmargin=*}
 
@@ -70,5 +71,10 @@
 \vspace*{\fill}
 \end{titlepage}
 }
+
+
+\newcommand{\getenv}[2][]{%
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
+  \if\relax\detokenize{#1}\relax\temp\else\let#1\temp\fi}
 
 
