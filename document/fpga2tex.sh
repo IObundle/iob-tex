@@ -6,7 +6,7 @@ HW_DIR=$REMOTE_ROOT_DIR/hardware
 echo $COMPILE_SERVER
 #altera
 if [ $INTEL = 1 ]; then \
-LOG="core.fit.summary";\
+LOG=$CORE_NAME.fit.summary;\
 RES="alt_results.tex";\
                         
 if [ $COMPILE_SERVER == localhost ]; then \
