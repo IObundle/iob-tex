@@ -1,24 +1,20 @@
-\LoadClass[twoside,twocolumn,a4paper]{article}
+\LoadClass[twoside,a4paper]{article}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iob_pb}
+\ProvidesClass{ug}
 
 \RequirePackage{graphicx}
 \RequirePackage{helvet}
 \RequirePackage{fancyhdr}
+%\RequirePackage{fancyvrb}
+%\RequirePackage[includehead,includefoot,top=50pt,bottom=50pt,headheight=24pt,margin=1in]{geometry}
 \RequirePackage[includehead,includefoot,top=50pt,bottom=50pt,headheight=24pt]{geometry}
 \RequirePackage[hidelinks]{hyperref}
-\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{multirow}
+\RequirePackage{verbatim}
 \RequirePackage{geometry}
-\RequirePackage{enumitem}
-\RequirePackage{titlesec}
-
-\setitemize{labelindent=2mm,labelsep=1mm,leftmargin=*}
-
-\setlength{\parindent}{1.0ex}
-\setlength{\parskip}{0.7ex}
-
-\titlespacing*{\section}
-{0pt}{1.5ex plus 0.5ex minus .2ex}{1.3ex plus .2ex}
+\RequirePackage{bm}
+\RequirePackage{tabularx}
+\RequirePackage{lipsum}
 
 \geometry{
  a4paper,
@@ -27,8 +23,10 @@
  top=20mm,
 }
 
-
 \pagestyle{fancy}
+\graphicspath{ {../figures/} {../figures/png/} }
+\setlength{\parskip}{\baselineskip}
+
 
 \renewcommand{\headrulewidth}{.4pt}
 \fancyhead{}
@@ -37,18 +35,14 @@
 \\
 \textsc{\small{\@category}}
 }
-\fancyhead[RE,LO]{\includegraphics[scale=.4]{Logo.png}}
+\fancyhead[RE,LO]{\includegraphics[scale=.15]{Logo.png}}
 
-\newcommand{\confidential}{\def\@confidential}
 \renewcommand{\footruleskip}{10pt}
 \renewcommand{\footrulewidth}{.4pt}
+
 \fancyfoot{}
-%\fancyfoot[RO,LE]{
-\fancyfoot[L]{\copyright \the\year{} IObundle LDA All rights reserved}
-\fancyfoot[R]{\url{www.IObundle.com}}
-%\fancyfoot[RE,LO]{\@ifundefined{@confidential}{}{\textbf{Confidential}}}
-%\thepage
-%}
+\fancyfoot[LO,RE]{\copyright 2020 IObundle Lda. All rights reserved\hspace{1cm}\url{www.iobundle.com}\hspace{1cm}{\bf Confidential}}
+\fancyfoot[LE,RO]{\thepage}
 
 \newcommand{\category}[1]{\def\@category{#1}}
 \renewcommand{\familydefault}{\sfdefault}

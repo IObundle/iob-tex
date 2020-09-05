@@ -1,4 +1,4 @@
-\documentclass{rep}
+\documentclass{ug}
 \usepackage{float}
 \usepackage{color, colortbl}
 \usepackage[section]{placeins}
@@ -234,7 +234,7 @@ currently supported in Intel FPGAs.
 
 \begin{figure}[h]
   \begin{center}
-    \includegraphics[width=12cm]{symb.pdf}
+    \includegraphics[width=12cm]{symb.png}
     \caption{IP symbol}
     \label{fig:symb}
   \end{center}
@@ -279,7 +279,7 @@ currently supported in Intel FPGAs.
 
 \begin{figure}[h]
   \begin{center}
-    \includegraphics[width=16cm]{bd.pdf}
+    \includegraphics[width=16cm]{bd.png}
     \caption{Block diagram}
     \label{fig:bd}
   \end{center}
@@ -441,14 +441,6 @@ RS232 pin is used, according to the table below:
   \end{center}
 \end{table}
 
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=16cm]{i2s.png}
-    \caption{Audio input I2S slave interface timing diagram}
-    \label{fig:i2s}
-  \end{center}
-\end{figure}
-\clearpage
 
 
 \subsection{Audio Output Parallel Interface}
@@ -507,16 +499,6 @@ RS232 pin is used, according to the table below:
   \end{center}
 \end{table}
 
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=16cm]{out.png}
-    \caption{Audio output parallel interface timing diagram}
-    \label{fig:out}
-  \end{center}
-\end{figure}
-
-\clearpage
 
       
 \subsection{SPI Slave Interface}
@@ -1103,55 +1085,14 @@ effective latency $L$ is given by the following equation:
 \section{Operation Flowchart}
 \label{sec:fchart}
 
-\begin{figure}[h]
-  \begin{center}
-    \includegraphics[width=13cm]{fchart.pdf}
-    \caption{Operation flowchart for each selected processor}
-    \label{fig:fchart}
-  \end{center}
-\end{figure}
-
 Set bitrate commands should be sent in the Pause state preferably. If sent
 during the Run state the last set bitrate will be used after the the encoder is
 paused and rerun, if no other bitrate is set during Pause.
 
 
 
-\section{Implementation Results}
+\input{../fpga}
 
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|c|c|c|c|}
-      \hline
-
-      \rowcolor{iob-green}
-      \textbf{Resource}  & \textbf{Used} & \textbf{Available} & \textbf{Usage ratio}\\
-      \hline
-      \hline
-
-      ALMs & 17,256 & 56,484 & 31\%\\
-      \hline
-
-      \rowcolor{iob-blue}
-      FFs & 19,059  & 225,920 & 8\%\\
-      \hline
-
-      BLOCK RAM bits & 4,582,528 & 7,692 & 65\%\\
-      \hline
-
-      BLOCK RAM blocks & 570 & 686 & 83\%\\
-      \hline
-
-      \rowcolor{iob-blue}
-      DSPs & 16 & 156 & 10\%\\
-      \hline
-      
-    \end{tabular}
-    \caption{Implementation Resources for the 5CGXFC7D6F27I7NSC device}
-    \label{tab:res}
-  \end{center}
-\end{table}
-\clearpage
 
 \section{Operation Frequencies and Clock Domains}
 

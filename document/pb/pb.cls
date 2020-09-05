@@ -1,16 +1,23 @@
-\LoadClass[twoside,a4paper]{article}
+\LoadClass[twoside,twocolumn,a4paper]{article}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rep}
+\ProvidesClass{pb}
 
 \RequirePackage{graphicx}
 \RequirePackage{helvet}
 \RequirePackage{fancyhdr}
-\RequirePackage{fancyvrb}
 \RequirePackage[includehead,includefoot,top=50pt,bottom=50pt,headheight=24pt]{geometry}
 \RequirePackage[hidelinks]{hyperref}
-\RequirePackage{multirow}
-\RequirePackage{verbatim}
-\RequirePackage{geometry}
+%\RequirePackage{geometry}
+\RequirePackage{enumitem}
+\RequirePackage{titlesec}
+
+\setitemize{labelindent=2mm,labelsep=1mm,leftmargin=*}
+
+\setlength{\parindent}{1.0ex}
+\setlength{\parskip}{0.7ex}
+
+\titlespacing*{\section}
+{0pt}{1.5ex plus 0.5ex minus .2ex}{1.3ex plus .2ex}
 
 \geometry{
  a4paper,
@@ -19,29 +26,30 @@
  top=20mm,
 }
 
+
 \pagestyle{fancy}
-\graphicspath{ {./figures/} {./wavedrom/} }
-\setlength{\parskip}{\baselineskip}
+\graphicspath{ {../figures/} {../figures/png/} }
 
 
 \renewcommand{\headrulewidth}{.4pt}
 \fancyhead{}
-\setlength{\headheight}{50pt}
-\setlength{\textheight}{220mm}
-\setlength{\headsep}{1.2cm}
 \fancyhead[RO,LE]{
 \textbf{\@title}
 \\
 \textsc{\small{\@category}}
 }
-\fancyhead[RE,LO]{\includegraphics[scale=.6]{Logo.png}}
+\fancyhead[RE,LO]{\includegraphics[scale=.4]{Logo.png}}
 
+\newcommand{\confidential}{\def\@confidential}
 \renewcommand{\footruleskip}{10pt}
 \renewcommand{\footrulewidth}{.4pt}
-
 \fancyfoot{}
-\fancyfoot[LO,RE]{\copyright \the\year\ IObundle Lda All rights reserved\hspace{1cm}\url{iobundle.com}\hspace{1cm}{\bf Confidential}}
-\fancyfoot[LE,RO]{\thepage}
+%\fancyfoot[RO,LE]{
+\fancyfoot[L]{\copyright \the\year{} IObundle Lda. All rights reserved}
+\fancyfoot[R]{\url{www.IObundle.com}}
+%\fancyfoot[RE,LO]{\@ifundefined{@confidential}{}{\textbf{Confidential}}}
+%\thepage
+%}
 
 \newcommand{\category}[1]{\def\@category{#1}}
 \renewcommand{\familydefault}{\sfdefault}
@@ -58,10 +66,9 @@
 \vspace*{2ex}
 \includegraphics[keepaspectratio,scale=.7]{Logo.png}
 
-\vspace*{2ex}
-\large IOB-2ES-MP3-E, Version \input{version.txt}, Build \input{shortHash.txt}
-
 \small{\today}
 \vspace*{\fill}
 \end{titlepage}
 }
+
+

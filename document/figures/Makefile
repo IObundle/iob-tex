@@ -1,19 +1,19 @@
 CC = soffice
-CFLAGS = --headless --convert-to pdf
+CFLAGS = --headless --convert-to png 
 LO_RUNNING = $(shell pgrep soffice)
+OBJS = $(patsubst %.odg,%.png,$(wildcard *.odg))
 
-
-all: $(patsubst %.odg,%.pdf,$(wildcard *.odg))
+all: $(OBJS)
 
 ifeq ($(LO_RUNNING), )
-%.pdf: %.odg
+%.png: %.odg
 	$(CC) $(CFLAGS) $<
 else 	
 $(error LibreOffice is running. Close it before proceeding.)
 endif
 
 clean:
-	@rm -f *.pdf *.eps *~
+	@rm -f *.png *~
 
-.PHONY: clean all
+.PHONY: all clean
 
