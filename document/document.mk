@@ -10,8 +10,7 @@ REMOTE_ROOT_DIR=$(REMOTE_ROOT_DIR) \
 INTEL=$(INTEL) \
 XILINX=$(XILINX) \
 CORE_NAME=$(CORE_NAME) \
-TEX_DIR=$(TEX_DIR) \
-DOC_DIR=$(DOC_DIR)
+TEX_DIR=$(TEX_DIR)
 
 figures:
 	make -C ../figures
