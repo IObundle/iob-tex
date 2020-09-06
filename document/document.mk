@@ -12,12 +12,13 @@ XILINX=$(XILINX) \
 CORE_NAME=$(CORE_NAME) \
 TEX_DIR=$(TEX_DIR)
 HW_DIR:=$(CORE_DIR)/hardware
+SW_DIR:=$(TEX_DIR)/../software
 
 figures:
 	make -C ../figures
 
 fpga: vivado.log $(CORE_NAME).fit.summary
-	$(EXPORT_LIST) $(TEX_DIR)/fpga2tex.sh
+	$(EXPORT_LIST) $(SW_DIR)/fpga2tex.sh
 
 $(CORE_NAME).fit.summary:
 ifeq ($(COMPILE_SERVER),localhost)
