@@ -19,11 +19,11 @@ def parse (program) :
         #print flds
         flds_out[1] = flds[0] #signal direction
         if not('[' in line):
-            flds_out[0] = flds[1] #signal name
+            flds_out[0] = re.sub('_','\\_',flds[1]) #signal name
             flds_out[2] = '1' #signal width
             flds_out[3] = string.join(flds[2:]) #signal description
         else:
-            flds_out[0] = flds[3] #signal name
+            flds_out[0] = re.sub('_','\\_',flds[3]) #signal name
             flds_out[2] = str(int(flds[1]) - int(flds[2]) + 1)  #signal width
             flds_out[3] = string.join(flds[4:]) #signal description
         program_out.append(flds_out)
@@ -52,7 +52,7 @@ def main () :
     #write output file
     fout = open (outfile, 'w')
     for line in program:
-        #print line
+        if ((line%2) != 0): fout.write("\rowcolor{iob-blue}\n")
         fout.write('%s & %s & %s & %s \\\ \hline\n' %  (line[0], line[1], line[2], line[3]));
 
 if __name__ == "__main__" : main ()
