@@ -1,6 +1,6 @@
 CORE_DIR:=../..
 
-include ../document.mk
+include $(CORE_DIR)/submodules/TEX/document/document.mk
 
 SRC:=ug.tex $(wildcard ./*.tex) $(wildcard ../*.tex)
 

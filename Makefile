@@ -8,4 +8,4 @@ clean:
 	make -C document/pb pdfclean
 	make -C document/ug pdfclean
 
-.PHONY: all pb ug clean
+.PHONY: doc clean
