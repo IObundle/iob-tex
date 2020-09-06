@@ -17,7 +17,7 @@ figures:
 	make -C ../figures
 
 fpga:
-	$(EXPORT_LIST) $(CORE_DIR)/document/fpga2tex.sh
+	$(EXPORT_LIST) $(TEX_DIR)/fpga2tex.sh
 
 clean:
 	@rm -f *~ *.aux *.out *.log *.summary *_results*
