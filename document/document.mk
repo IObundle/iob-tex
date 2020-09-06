@@ -11,12 +11,28 @@ INTEL=$(INTEL) \
 XILINX=$(XILINX) \
 CORE_NAME=$(CORE_NAME) \
 TEX_DIR=$(TEX_DIR)
+HW_DIR:=$(CORE_DIR)/hardware
 
 figures:
 	make -C ../figures
 
-fpga:
+fpga: vivado.log $(CORE_NAME).fit.summary
 	$(EXPORT_LIST) $(TEX_DIR)/fpga2tex.sh
+
+$(CORE_NAME).fit.summary:
+ifeq ($(COMPILE_SERVER),localhost)
+	cp $(HW_DIR)/fpga/CYCLONEV-GT/output_files/$@ .
+else
+	scp $(COMPILE_SERVER):$(HW_DIR)/fpga/CYCLONEV-GT/output_files/$@ .
+endif
+
+vivado.log:
+ifeq ($(COMPILE_SERVER),localhost)
+	cp $(HW_DIR)/fpga/XCKU/$@ .
+else
+	scp $(COMPILE_SERVER):$(HW_DIR)/fpga/XCKU/$@ .
+endif
+
 
 clean:
 	@rm -f *~ *.aux *.out *.log *.summary *_results*

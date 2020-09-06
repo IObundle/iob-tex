@@ -1,19 +1,9 @@
 #!/bin/bash
 
-#COMPILE_SERVER=$1
-HW_DIR=$REMOTE_ROOT_DIR/hardware
-
-echo $COMPILE_SERVER
 #altera
 if [ $INTEL = 1 ]; then \
 LOG=$CORE_NAME.fit.summary;\
-RES="alt_results.tex";\
-                        
-if [ $COMPILE_SERVER == localhost ]; then \
-    cp $HW_DIR/fpga/CYCLONEV-GT/output_files/$LOG . ;\
-else \
-    scp $COMPILE_SERVER:$HW_DIR/fpga/CYCLONEV-GT/output_files/$LOG . ;\
-fi;
+RES="alt_results.tex";\                 
 ALM=`grep ALM $LOG |grep -o '[0-9]*,\?[0-9]* \/' | sed s/'\/'//g`;\
 FF=`grep registers $LOG |grep -o '[0-9]*' | sed s/'\/'//g`;\
 DSP=`grep DSP $LOG |grep -o '[0-9]* \/' | sed s/'\/'//g`;\
@@ -36,11 +26,6 @@ fi
 if [ $XILINX = 1 ]; then \
 LOG="vivado.log" ;\
 RES="xil_results.tex" ;\
-if [ $COMPILE_SERVER == localhost ]; then \
-    cp $HW_DIR/fpga/XCKU/$LOG . ;\
-else \
-    scp $COMPILE_SERVER:$HW_DIR/fpga/XCKU/$LOG . ;\
-fi;
 LUT=`grep -o 'LUTs\ *|\ * [0-9]*' vivado.log | sed s/'| L'/L/g | sed s/\|/'\&'/g` ;\
 FF=`grep -o 'Registers\ *|\ * [0-9]*' vivado.log | sed s/'| L'/L/g | sed s/\|/'\&'/g` ;\
 DSP=`grep -o 'DSPs\ *|\ * [0-9]*' vivado.log | sed s/'| L'/L/g | sed s/\|/'\&'/g` ;\
