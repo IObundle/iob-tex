@@ -51,8 +51,9 @@ def main () :
 
     #write output file
     fout = open (outfile, 'w')
-    for line in program:
-        if ((line%2) != 0): fout.write("\rowcolor{iob-blue}\n")
+    for i in range(len(program)):
+        if ((i%2) != 0): fout.write("\\rowcolor{iob-blue}\n")
+        line = program[i]
         fout.write('%s & %s & %s & %s \\\ \hline\n' %  (line[0], line[1], line[2], line[3]));
 
 if __name__ == "__main__" : main ()
