@@ -12,35 +12,39 @@
 \newtheorem*{defn*}{Definition}
 \newtheorem*{ex*}{Example}
 
-\definecolor{iob-green}{rgb}{0.0,1.0,0.80}
-\definecolor{iob-blue}{rgb}{0.90196,0.94902,1}
 
 \title{IObundle Example User Guide}
 \category{User Guide}
+
+\getenv[\DOC]{DOC_DIR}
+\input{\DOC/color}
 
 \begin{document}
 \maketitle
 \cleardoublepage
 \tableofcontents
-\cleardoublepage
+\clearpage
 \listoftables
-\cleardoublepage
+\clearpage
 \listoffigures
 \cleardoublepage
 
+\section{\textcolor[rgb]{0,0,0}{Introduction}}
+\input{../intro}
 
-\subsection{Functional Description}
-\label{sec:func}
+\section{\textcolor[rgb]{0,0,0}{Features}}
+\input{../features}
 
-\subsubsection{Hardware Components}
+\section{\textcolor[rgb]{0,0,0}{Benefits}}
+\input{../benefits}
 
+\section{\textcolor[rgb]{0,0,0}{Deliverables}}
+\input{../deliverables}
 
-\subsubsection{Software Components}
-
+\section*{\textcolor[rgb]{0,0,0}{Block Diagram}}
+\input{../bd}
 
 \section{Interface Signals}
-
-\subsection{General Interface Signals}
 
 \begin{table}[H]
   \begin{center}
@@ -51,14 +55,7 @@
       \hline
       \hline
 
-      sys\_clk &  IN & Main system clock \\
-      \hline
-
-      \rowcolor{iob-blue} sys\_rst & IN & Asynchronous active high reset
-      signal. \\ \hline
-
-      interrupt & OUT & Interrupt signal; goes high if any
-      unmasked interrupt bit is high.\\ \hline
+     % \input is_tab.tex
 
     \end{tabular}
     \caption{General interface signals}
@@ -66,68 +63,8 @@
   \end{center}
 \end{table}
 
-\subsection{RS232 Interface Signals}
 
-The RS232 IP core used in the {\it Intel FPGA UART Core} described in Chapter 9
-of the following document accessed in June/20/2018 from
-
-\hyperlink{https://www.altera.com/en\_US/pdfs/literature/ug/ug\_embedded\_ip.pdf}{https://www.altera.com/en\_US/pdfs/literature/ug/ug\_embedded\_ip.pdf}.
-
-Three instances of this IP are being used, one for each CPU. However, only one
-RS232 pin is used, according to the table below:
-
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|l|l|p{8cm}|}
-      \hline
-      \rowcolor{iob-green}
-      \textbf{Signal} & \textbf{Direction} & \textbf{Description} \\
-      \hline
-      \hline
-
-      rs232\_tx &  OUT & Serial transmit signal from CPU0\\
-      \hline
-
-      rs232\_tx\_1 &  OUT & Serial transmit signal from CPU1\\
-      \hline
-
-      rs232\_tx\_2 &  OUT & Serial transmit signal CPU2\\
-      \hline
-
-    \end{tabular}
-    \caption{RS232 interface signals}
-    \label{tab:rs232}
-  \end{center}
-\end{table}
-\clearpage
-
-      
-\subsection{SPI Slave Interface}
-
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|l|l|l|}
-      \hline
-
-      \rowcolor{iob-green}
-      \textbf{Signal} & \textbf{Direction} & \textbf{Description} \\
-      \hline
-      \hline
-
-      spi\_sclk & IN & SPI serial (bit) clock.\\ \hline
-
-      \rowcolor{iob-blue} spi\_mosi & IN & SPI master output / slave
-      input.\\ \hline
-
-      spi\_miso & OUT & SPI master input / slave output.\\ \hline
-
-      \rowcolor{iob-blue} spi\_ss & IN & SPI slave select. \\ \hline
-
-    \end{tabular}
-    \caption{SPI slave interface}
-    \label{tab:spi}
-  \end{center}
-\end{table}
+\section{Timing Diagrams}
 
 \begin{figure}[H]
   \begin{center}
@@ -137,7 +74,9 @@ RS232 pin is used, according to the table below:
   \end{center}
 \end{figure}
 
+\section{Software Components}
 
+\section*{FPGA Resources}
 \input{../fpga}
 
 

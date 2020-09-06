@@ -29,51 +29,31 @@ keepaspectratio]{bg.png}%
 }}}
 
 
-
+\getenv[\TEX]{TEX_DIR}
 \getenv[\DOC]{DOC_DIR}
 
-\input{\DOC/color}
+\input{\TEX/color}
 
 \begin{document}
 \AddToShipoutPicture*{\BackgroundPic}
 
 \section*{\textcolor[rgb]{0,0,0}{Overview}}
-\lipsum[1-1]
+\input{../intro}
 
 \section*{\textcolor[rgb]{0,0,0}{Features}}
-\begin{itemize}
-\item f1
-\item f2
-\end{itemize}
+\input{../features}
 
 \section*{\textcolor[rgb]{0,0,0}{Benefits}}
-\begin{itemize}
-\item Compact hardware implementation
-\item Can fit many instances in low cost FPGAs
-\item Can fit many instances in small ASICs 
-\item Low power consumption
-\end{itemize}
-
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\input{../benefits}
 
 \section*{\textcolor[rgb]{0,0,0}{Deliverables}}
-\begin{itemize}
-\item FPGA netlist or source code (optional)
-\item Example testbench
-\item Implementation constraints for map, place and route
-\item Demo on commercial board with Ethernet realtime MPEG 1 Layer II decoding
-\item Datasheet and user documentation for system integration
-\end{itemize}
+\input{../deliverables}
+
 
 \section*{\textcolor[rgb]{0,0,0}{Block Diagram}}
-\begin{figure}[H]
-  \vspace{-.5cm}
-  \centering
-      {\includegraphics[width=\columnwidth]{bd.png}}
-\end{figure}
+\input{../bd}
 
+\section*{FPGA Resources}
 \input{\DOC/fpga}
 
 \input{../disclaimer}

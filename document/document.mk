@@ -1,16 +1,23 @@
-include $(ROOT_DIR)/core.mk
+include $(CORE_DIR)/core.mk
 
 pb: pb.pdf
 
 ug: ug.pdf
 
-EXPORT_LIST:=COMPILE_SERVER=$(COMPILE_SERVER)  REMOTE_ROOT_DIR=$(REMOTE_ROOT_DIR) INTEL=$(INTEL) XILINX=$(XILINX) CORE_NAME=$(CORE_NAME)
+EXPORT_LIST:=\
+COMPILE_SERVER=$(COMPILE_SERVER) \
+REMOTE_ROOT_DIR=$(REMOTE_ROOT_DIR) \
+INTEL=$(INTEL) \
+XILINX=$(XILINX) \
+CORE_NAME=$(CORE_NAME) \
+TEX_DIR=$(TEX_DIR) \
+DOC_DIR=$(DOC_DIR)
 
 figures:
 	make -C ../figures
 
 fpga:
-	$(EXPORT_LIST) $(TEX_DIR)/document/fpga2tex.sh
+	$(EXPORT_LIST) $(CORE_DIR)/document/fpga2tex.sh
 
 clean:
 	@rm -f *~ *.aux *.out *.log *.summary *_results*

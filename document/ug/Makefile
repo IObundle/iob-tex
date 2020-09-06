@@ -1,13 +1,13 @@
-ROOT_DIR:=../..
+CORE_DIR:=../..
 
 include ../document.mk
 
-SRC:=$(wildcard *.tex)
+SRC:=ug.tex $(wildcard ./*.tex) $(wildcard ../*.tex)
 
 ug.pdf: $(SRC) figures fpga
 	git rev-parse --short HEAD > shortHash.txt
-	pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
-	pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	evince $@ &
 
 

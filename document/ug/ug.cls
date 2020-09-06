@@ -1,6 +1,6 @@
 \LoadClass[twoside,a4paper]{article}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ug}
+\ProvidesClass{../../submodules/TEX/document/pb/pb}
 
 \RequirePackage{graphicx}
 \RequirePackage{helvet}
@@ -15,6 +15,7 @@
 \RequirePackage{bm}
 \RequirePackage{tabularx}
 \RequirePackage{lipsum}
+\RequirePackage{catchfile}
 
 \geometry{
  a4paper,
@@ -63,3 +64,7 @@
 \vspace*{\fill}
 \end{titlepage}
 }
+
+\newcommand{\getenv}[2][]{%
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1}%
+  \if\relax\detokenize{#1}\relax\temp\else\let#1\temp\fi}

@@ -1,8 +1,8 @@
-ROOT_DIR:=../..
+CORE_DIR:=../..
 
-include $(ROOT_DIR)/submodules/TEX/document/document.mk
+include $(CORE_DIR)/submodules/TEX/document/document.mk
 
 pb.pdf: pb.tex figures fpga
-	DOC_DIR=$(TEX_DIR)/document pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
-	DOC_DIR=$(TEX_DIR)/document pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	evince $@ &
