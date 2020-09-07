@@ -24,14 +24,14 @@ $(CORE_NAME).fit.summary:
 ifeq ($(COMPILE_SERVER),localhost)
 	cp $(HW_DIR)/fpga/CYCLONEV-GT/output_files/$@ .
 else
-	scp $(COMPILE_SERVER):$(HW_DIR)/fpga/CYCLONEV-GT/output_files/$@ .
+	scp $(COMPILE_SERVER):$(REMOTE_ROOT_DIR)/hardware/fpga/CYCLONEV-GT/output_files/*.fit.summary $@ 
 endif
 
 vivado.log:
 ifeq ($(COMPILE_SERVER),localhost)
 	cp $(HW_DIR)/fpga/XCKU/$@ .
 else
-	scp $(COMPILE_SERVER):$(HW_DIR)/fpga/XCKU/$@ .
+	scp $(COMPILE_SERVER):$(REMOTE_ROOT_DIR)/hardware/fpga/XCKU/$@ .
 endif
 
 
