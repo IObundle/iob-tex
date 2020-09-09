@@ -14,7 +14,6 @@ def swreg_parse(swreg_list, defines):
     #generate software accessible register table
     if swreg_list:
         addr_w = int(math.ceil(math.log(len(swreg_list)*4)/math.log(2)/4))
-        print(addr_w)
         swreg_addr = 0
         for flds in swreg_list:
             flds_out = ['','','','','']
@@ -45,7 +44,11 @@ def parse (program, defines) :
     swreg_list = []
     for line in program :
         flds_out = ['','','','']
-        flds = re.sub('\[|\]|:|,|//|\(|\)\;',' ', line).split()
+        subline = re.sub('\[|\]|:|,|//|\;',' ', line)
+        subline = re.sub('\(',' ',subline, 1)
+        subline = re.sub('\)',' ', subline, 1)
+
+        flds = subline.split()
         if not flds : continue #empty line
         #print flds[0]
         if (flds[0] == 'input') | (flds[0] == 'output') | (flds[0] == 'inout'): #IO
@@ -115,6 +118,10 @@ def header_parse (f):
                         const = line.split("'h")
                         const = const[1].split(" ")
                         lookup["`" + values[1]] = int(const[0],16)
+                    elif "'b" in line:
+                        const = line.split("'b")
+                        const = const[1].split(" ")
+                        lookup["`" + values[1]] = int(const[0],2)
                     elif "(" in line:
                         line = re.sub('`', '', line)
                         if "'b" in line:
@@ -144,7 +151,8 @@ def header_parse (f):
 
         #Write to dictionary
         for key, val in lookup.items():
-            defines.update({key:int(val)})
+            if val:
+                defines.update({key:int(val)})
     return defines
 
 def main () :
