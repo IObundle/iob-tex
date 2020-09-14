@@ -48,7 +48,7 @@ def swreg_parse (program, defines) :
 
     #generate software accessible register table
     if tables_dict:
-        print(tables_dict)
+        #print(tables_dict)
         addr_w = int(math.ceil(math.log(swreg_cnt*4)/math.log(2)/4))
         swreg_addr = 0
         for table_name, swreg_list in reversed(tables_dict.items()):
