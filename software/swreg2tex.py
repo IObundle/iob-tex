@@ -54,7 +54,7 @@ def swreg_parse (program, defines) :
         for table_name, swreg_list in reversed(tables_dict.items()):
             program_out = []
             for flds in swreg_list:
-                flds_out = ['','','','','']
+                flds_out = ['','','','','','']
                 flds_out[0] = re.sub('_','\\_', flds[1]) #register name
 
                 #register direction
@@ -72,7 +72,8 @@ def swreg_parse (program, defines) :
                         flds[2] = eval(re.sub(str(key),str(val), flds[2]))
                 flds_out[3] = str(int(flds[2])-1) + ":0" #register width
 
-                flds_out[4] =  string.join(flds[3:]) #register description
+                flds_out[4] = flds[3] #reset value
+                flds_out[5] =  string.join(flds[4:]) #register description
 
                 program_out.append(flds_out)
 
