@@ -17,34 +17,23 @@ def io_parse (program, defines) :
     for line in program :
         flds_out = ['','','','']
         subline = re.sub('\[|\]|:|,|//|\;',' ', line)
+        subline = re.sub('\(',' ',subline, 1)
+        subline = re.sub('\)',' ', subline, 1)
 
         flds = subline.split()
         if not flds : continue #empty line
         #print flds[0]
-        if (flds[0] != 'input') & (flds[0] != 'output') & (flds[0] != 'inout'): continue #not IO
+        if (flds[0] != '`INPUT') & (flds[0] != '`OUTPUT') & (flds[0] != '`INOUT'): continue #not IO
         #print flds
-        flds_out[1] = flds[0] #signal direction
+        flds_out[1] = string.lower(re.sub('`','', flds[0])) #signal direction
 
-        flds_w = 1
-        if (flds[1] == 'reg'):
-            flds_w = flds_w+1
-        if (flds[1] == 'signed'):
-            flds_w = flds_w+1
-            
-        if not('[' in line):
-            flds_out[0] = re.sub('_','\\_',flds[flds_w]) #signal name
-            flds_out[2] = '1' #signal width
-            flds_out[3] = string.join(flds[flds_w+1:]) #signal description
-        else:
-            flds_out[0] = re.sub('_','\\_',flds[flds_w+2]) #signal name
-            for key, val in defines.items():
-                if key in str(flds[flds_w]):
-                    flds[flds_w] = eval(re.sub(str(key),str(val), flds[flds_w]))
-                if key in str(flds[flds_w+1]):
-                    flds[flds_w+1] = eval(re.sub(str(key),str(val), flds[flds_w+1]))
-                pass
-            flds_out[2] = str(int(flds[flds_w]) - int(flds[flds_w+1]) + 1)  #signal width
-            flds_out[3] = string.join(flds[flds_w+3:]) #signal description
+        flds_out[0] = re.sub('_','\\_',flds[1]) #signal name
+        for key, val in defines.items():
+            if key in str(flds[2]):
+                flds[2] = eval(re.sub(str(key),str(val), flds[2]))
+            pass
+        flds_out[2] = str(flds[2])  #signal width
+        flds_out[3] = string.join(flds[3:]) #signal description
 
         program_out.append(flds_out)
 
