@@ -35,7 +35,7 @@ else
 endif
 
 
-clean:
+texclean:
 	@rm -f *~ *.aux *.out *.log *.summary *_results*
 	@rm -f *.lof *.toc *.fdb_latexmk  ug.fls  *.lot *.txt
 	make -C ../figures clean
@@ -43,4 +43,4 @@ clean:
 pdfclean: clean
 	@rm -f *.pdf
 
-.PHONY: pb ug clean pdfclean
+.PHONY: pb ug texclean pdfclean
