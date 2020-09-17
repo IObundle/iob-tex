@@ -60,7 +60,7 @@ def swreg_parse (program, defines) :
                 #register direction
                 if '_RW' in flds[0]:
                     flds_out[1] = 'R/W'
-                elif 'W' in flds[1]:
+                elif '_W' in flds[0]:
                     flds_out[1] = 'W'
                 else:
                     flds_out[1] = 'R'
