@@ -30,7 +30,8 @@ def block_parse (program) :
 def main () :
     #parse command line
     if len(sys.argv) < 3:
-        vaError("Usage: ./v2tex.py outfile [infiles]")
+        print("Usage: ./v2tex.py outfile [infiles]")
+        exit()
     else:
         outfile = sys.argv[1]
         infiles = sys.argv[2:]

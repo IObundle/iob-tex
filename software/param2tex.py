@@ -33,7 +33,8 @@ def param_parse (program) :
 def main () :
     #parse command line
     if len(sys.argv) != 3:
-        vaError("Usage: ./v2tex.py infile outfile")
+        print("Usage: ./v2tex.py infile outfile")
+        exit()
     else:
         infile = sys.argv[1]
         outfile = sys.argv[2]
