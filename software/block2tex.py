@@ -30,15 +30,21 @@ def block_parse (program) :
 def main () :
     #parse command line
     if len(sys.argv) != 3:
-        vaError("Usage: ./v2tex.py infile outfile")
+        vaError("Usage: ./v2tex.py outfile [infiles]")
     else:
-        infile = sys.argv[1]
-        outfile = sys.argv[2]
+        outfile = sys.argv[1]
+        infiles = sys.argv[2:]
         pass
 
-    #parse input file
-    fin = open (infile, 'r')
-    program = fin.readlines()
+    print(sys.argv)
+    #add input files
+    program = []
+    for infile in infiles:
+        fin = open (infile, 'r')
+        program.extend(fin.readlines())
+        fin.close()
+    
+    #parse input files
     program = block_parse (program)
 
     #write output file
@@ -51,8 +57,7 @@ def main () :
             line_out = line_out + (' & %s' % line[l])
         fout.write(line_out + ' \\\ \hline\n')
 
-    #Close files
-    fin.close()
+    #Close output file
     fout.close()
 
 if __name__ == "__main__" : main ()
