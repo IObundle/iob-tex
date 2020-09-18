@@ -17,7 +17,7 @@ def swreg_parse(swreg_list, defines):
         swreg_addr = 0
         for flds in swreg_list:
             flds_out = ['','','','','']
-            flds_out[0] = re.sub('_','\\_', flds[1]) #register name
+            flds_out[0] = re.sub('_','\_', flds[1]) #register name
 
             #register direction
             if '_RW' in flds[0]:
@@ -66,7 +66,7 @@ def parse (program, defines) :
                 flds_out[2] = '1' #signal width
                 flds_out[3] = string.join(flds[flds_w+1:]) #signal description
             else:
-                flds_out[0] = re.sub('_','\\_',flds[flds_w+2]) #signal name
+                flds_out[0] = re.sub('_','\_',flds[flds_w+2]) #signal name
                 for key, val in defines.items():
                     if key in str(flds[flds_w]):
                         flds[flds_w] = eval(re.sub(str(key),str(val), flds[flds_w]))
