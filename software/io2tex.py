@@ -27,13 +27,13 @@ def io_parse (program, defines) :
         #print flds
         flds_out[1] = string.lower(re.sub('`','', flds[0])) #signal direction
 
-        flds_out[0] = re.sub('_','\\_',flds[1]) #signal name
+        flds_out[0] = re.sub('_','\_',flds[1]) #signal name
         for key, val in defines.items():
             if key in str(flds[2]):
                 flds[2] = eval(re.sub(str(key),str(val), flds[2]))
             pass
         flds_out[2] = str(flds[2])  #signal width
-        flds_out[3] = string.join(flds[3:]) #signal description
+        flds_out[3] = re.sub('_','\_',string.join(flds[3:])) #signal description
 
         program_out.append(flds_out)
 
@@ -42,7 +42,8 @@ def io_parse (program, defines) :
 def main () :
     #parse command line
     if len(sys.argv) != 3 and len(sys.argv) != 4:
-        vaError("Usage: ./v2tex.py infile outfile [header_file]")
+        print("Usage: ./io2tex.py infile [header_file]")
+        quit()
     else:
         infile = sys.argv[1]
         outfile = sys.argv[2]

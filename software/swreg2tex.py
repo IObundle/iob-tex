@@ -55,7 +55,7 @@ def swreg_parse (program, defines) :
             program_out = []
             for flds in swreg_list:
                 flds_out = ['','','','','','']
-                flds_out[0] = re.sub('_','\\_', flds[1]) #register name
+                flds_out[0] = re.sub('_','\_', flds[1]) #register name
 
                 #register direction
                 if '_RW' in flds[0]:
@@ -73,7 +73,7 @@ def swreg_parse (program, defines) :
                 flds_out[3] = str(int(flds[2])-1) + ":0" #register width
 
                 flds_out[4] = flds[3] #reset value
-                flds_out[5] =  string.join(flds[4:]) #register description
+                flds_out[5] = re.sub('_','\_', string.join(flds[4:])) #register description
 
                 program_out.append(flds_out)
 
@@ -84,7 +84,8 @@ def swreg_parse (program, defines) :
 def main () :
     #parse command line
     if len(sys.argv) != 2 and len(sys.argv) != 3:
-        vaError("Usage: ./v2tex.py infile [header_file]")
+        print("Usage: ./swreg2tex.py infile [header_file]")
+        quit()
     else:
         infile = sys.argv[1]
         if len(sys.argv) == 3:
