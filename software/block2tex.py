@@ -29,7 +29,7 @@ def block_parse (program) :
 
 def main () :
     #parse command line
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         vaError("Usage: ./v2tex.py outfile [infiles]")
     else:
         outfile = sys.argv[1]
