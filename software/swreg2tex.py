@@ -70,7 +70,11 @@ def swreg_parse (program, defines) :
                 for key, val in defines.items():
                     if key in str(flds[2]):
                         flds[2] = eval(re.sub(str(key),str(val), flds[2]))
-                flds_out[3] = str(int(flds[2])-1) + ":0" #register width
+
+                if flds[2].isdigit():
+                    flds_out[3] = str(int(flds[2])-1) + ":0" #register width
+                else:
+                    flds_out[3] = re.sub('_', '\_', str(flds[2])) + "-1:0" #register width
 
                 flds_out[4] = flds[3] #reset value
                 flds_out[5] = re.sub('_','\_', string.join(flds[4:])) #register description

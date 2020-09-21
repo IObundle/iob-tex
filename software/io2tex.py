@@ -32,7 +32,7 @@ def io_parse (program, defines) :
             if key in str(flds[2]):
                 flds[2] = eval(re.sub(str(key),str(val), flds[2]))
             pass
-        flds_out[2] = str(flds[2])  #signal width
+        flds_out[2] = re.sub('_', '\_', str(flds[2]))  #signal width
         flds_out[3] = re.sub('_','\_',string.join(flds[3:])) #signal description
 
         program_out.append(flds_out)
