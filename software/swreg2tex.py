@@ -30,7 +30,7 @@ def swreg_parse (program, defines) :
     swreg_cnt = 0
     tables_dict = {}
     for line in program :
-        if line.startswith("//"): continue #commented line
+        if line.startswith("//`SWREG"): continue #commented SWREG line
             
         subline = re.sub('\[|\]|:|,|//|\;',' ', line)
         subline = re.sub('\(',' ',subline, 1)
