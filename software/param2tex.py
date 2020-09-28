@@ -12,7 +12,7 @@ def param_parse (program) :
     program_out = []
 
     for line in program :
-        flds_out = ['', '']
+        flds_out = ['', '', '']
         subline = re.sub('//',' ', line)
         subline = re.sub('=', '', subline, 1)
 
@@ -21,10 +21,13 @@ def param_parse (program) :
         #print flds[0]
         if (flds[0] != 'parameter'): continue #not a block description
         #print flds
+        
+        param_desc = str(re.sub('_','\_', string.join(flds[3:])))
+        if param_desc.startswith("NODOC"): continue #undocummented parameter
 
         flds_out[0] = re.sub('_','\_', flds[1]) #parameter name
-        #flds_out[1] = re.sub(',', '', flds[2]) #parameter value
-        flds_out[1] = "\\noindent\parbox[c]{\hsize}{\\rule{0pt}{15pt} " + re.sub('_','\_', string.join(flds[3:])) + " \\vspace{2mm}}" #parameter description
+        flds_out[1] = re.sub('_', '\_', re.sub(',', '', flds[2])) #parameter value
+        flds_out[2] = "\\noindent\parbox[c]{\hsize}{\\rule{0pt}{15pt} " + str(param_desc) + " \\vspace{2mm}}" #parameter description
 
         program_out.append(flds_out)
 
