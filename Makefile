@@ -2,7 +2,7 @@ CORE_DIR:=.
 include core.mk
 
 doc:
-	make -C $(DOC_DIR)/$(DOC_TRGT) $(DOC_TRGT)
+	make -C $(DOC_DIR)/$(DOC_TYPE) $(DOC_TYPE)
 
 clean:
 	make -C document/pb pdfclean

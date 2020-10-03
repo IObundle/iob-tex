@@ -5,8 +5,8 @@ SIM_DIR:=$(CORE_DIR)/hardware/simulation/icarus
 #FPGA_DIR:=hardware/fpga/CYCLONEV-GT
 FPGA_DIR:=$(CORE_DIR)/hardware/fpga/XCKU
 
-#DOC_TRGT:=pb
-#DOC_TRGT:=ug
+#DOC_TYPE:=pb
+#DOC_TYPE:=ug
 DOC_DIR:=$(CORE_DIR)/document
 
 INTEL:=1
