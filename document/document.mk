@@ -1,5 +1,7 @@
 include $(CORE_DIR)/core.mk
 
+IS_CORE=$(IS_CORE)
+
 pb: pb.pdf
 
 ug: ug.pdf
@@ -10,10 +12,6 @@ REMOTE_ROOT_DIR=$(REMOTE_ROOT_DIR) \
 INTEL=$(INTEL) \
 XILINX=$(XILINX) \
 CORE_NAME=$(CORE_NAME) \
-TEX_DIR=$(TEX_DIR) \
-IS_CORE=$(IS_CORE)
-HW_DIR:=$(CORE_DIR)/hardware
-SW_DIR:=$(TEX_DIR)/../software
 
 figures:
 	make -C ../figures
