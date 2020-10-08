@@ -29,7 +29,7 @@
 
 
 \pagestyle{fancy}
-\graphicspath{ {../figures/} {../figures/png/} }
+\graphicspath{{../figures/} {./}}
 
 
 \renewcommand{\headrulewidth}{.4pt}
