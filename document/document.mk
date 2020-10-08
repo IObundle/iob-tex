@@ -44,4 +44,4 @@ texclean:
 pdfclean: clean
 	@rm -f *.pdf
 
-.PHONY: pb ug texclean pdfclean
+.PHONY: pb ug texclean pdfclean vivado.log
