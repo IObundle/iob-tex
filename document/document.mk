@@ -2,10 +2,11 @@ EXPORT_LIST:=\
 INTEL=$(INTEL) \
 XILINX=$(XILINX) \
 CORE_NAME=$(CORE_NAME) \
-TEX_DIR=$(TEX_DIR)/document
 
+TEX_DIR=$(TEX_DIR)
 TEX_SRC:= color.tex deliverables.tex benefits.tex
 TEX_FIG:= bg.odg Logo.png
+IS_CORE=$(IS_CORE)
 
 HW_DIR:=$(CORE_DIR)/hardware
 
@@ -57,3 +58,4 @@ copy_files:
 	@cp $(addprefix $(TEX_DIR)/document/, $(TEX_SRC)) .
 
 .PHONY: clean texclean pdfclean fpga figures
+
