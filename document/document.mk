@@ -1,16 +1,35 @@
 XIL_LOG:=vivado.log
-INT_LOG:=*.fit.summary
+INT_LOG:=quartus.log
+EXPORT_LIST:=\
+CORE_NAME=$(CORE_NAME)\
+INTEL=$(INTEL)\
+XILINX=$(XILINX)
 
+TEX:=$(TEX_DIR)/document
+TEX_SW_DIR:=$(TEX_DIR)/software
+
+pb.pdf: pb.tex figures fpga_res
+	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	evince $@ &
+
+ug.pdf: $(SRC) figures fpga_res version.txt
+	git rev-parse --short HEAD > shortHash.txt
+#	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+#	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
+	evince $@ &
+
+export TD_FIGS
 figures:
-	cp $(addprefix $(TEX_DIR)/document/figures/, $(TEX_FIG)) ../figures
+	cp $(TEX_DIR)/document/figures/* ../figures
 	make -C ../figures
 
-fpga_log:
+fpga_res: $(FPGA_LIST)
 ifeq ($(XILINX),1)
-	cp $(HW_DIR)/fpga/$(FPGA_FAMILY)/$(XIL_LOG) .
+	cp $(HW_DIR)/fpga/XCKU/vivado.log .
 endif
 ifeq ($(INTEL),1)
-	cp $(HW_DIR)/fpga/$(FPGA_FAMILY)/output_files/$(INT_LOG) .
+	cp $(HW_DIR)/fpga/CYCLONEV-GT/output_files/quartus.log .
 endif
 	$(EXPORT_LIST) $(TEX_DIR)/software/fpga2tex.sh
 
@@ -23,19 +42,4 @@ texclean:
 pdfclean: clean
 	@rm -f *.pdf
 
-pb.pdf: pb.tex figures fpga copy_files
-	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
-	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
-	evince $@ &
-
-ug.pdf: $(SRC) figures fpga
-	git rev-parse --short HEAD > shortHash.txt
-	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
-	$(EXPORT_LIST) pdflatex '\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
-	evince $@ &
-
-copy_files:
-	@cp $(addprefix $(TEX_DIR)/document/, $(TEX_SRC)) .
-
-.PHONY:  figures fpga_log texclean pdfclean copy_files
-
+.PHONY:  figures fpga_res texclean pdfclean
