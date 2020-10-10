@@ -1,5 +1,6 @@
 XIL_LOG=vivado.log
 INT_LOG=quartus.log
+
 EXPORT_LIST=\
 INTEL=$(INTEL)\
 XILINX=$(XILINX)\
@@ -24,14 +25,14 @@ figures:
 	cp -u $(TEX_DIR)/document/figures/* ../figures
 	make -C ../figures
 
-fpga_res: $(FPGA_LIST)
+fpga_res:
 ifeq ($(XILINX),1)
-	cp $(HW_DIR)/fpga/vivado/XCKU/vivado.log .
+	cp $($(CORE_NAME)_HW_DIR)/fpga/vivado/XCKU/vivado.log .
 endif
 ifeq ($(INTEL),1)
-	cp $(HW_DIR)/fpga/quartus/CYCLONEV-GT/quartus.log .
+	cp $($(CORE_NAME)_HW_DIR)/fpga/quartus/CYCLONEV-GT/quartus.log .
 endif
-	$(EXPORT_LIST) $(TEX_DIR)/software/fpga2tex.sh
+	$(EXPORT_LIST) $(TEX_SW_DIR)/fpga2tex.sh
 
 texclean:
 	@rm -f *~ *.aux *.out *.log *.summary *_results*
