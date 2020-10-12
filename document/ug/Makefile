@@ -1,6 +1,3 @@
-#ROOT_DIR:=../..
-#include $(I2S_DIR)/core.mk
-
 CORE_DIR:=../..
 
 SRC:=ug.tex $(wildcard ./*.tex) $(wildcard ../*.tex)
