@@ -14,7 +14,7 @@ pb.pdf: pb.tex figures fpga_res
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	evince $@ &
 
-ug.pdf: $(SRC) figures fpga_res version.txt
+ug.pdf: $(SRC) figures fpga_res $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
