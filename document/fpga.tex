@@ -1,6 +1,10 @@
 \begin{table}[H]
 \ifnum\XILINX=1
-\begin{minipage}{.45\linewidth}
+\ifnum\INTEL=1
+\begin{minipage}{0.45\linewidth}
+\else
+\begin{minipage}{\linewidth}
+\fi
 \centering
 \begin{tabular}{|l|r|}
 \hline
@@ -13,7 +17,11 @@
 \end{minipage}
 \fi
 \ifnum\INTEL=1
-\begin{minipage}{.45\linewidth}
+\ifnum\XILINX=1
+\begin{minipage}{0.45\linewidth}
+\else
+\begin{minipage}{\linewidth}
+\fi
 \centering
 \begin{tabular}{|l|r|}
 \hline
@@ -23,7 +31,19 @@
 \hline
 \input alt_results.tex 
 \end{tabular}
-\fi
 \end{minipage}
+\fi
+\ifnum\INTEL=1
+\ifnum\XILINX=1
 \caption{Kintex Ultrascale (left) and Cyclone V GT (right)}
+\fi
+\ifnum\XILINX=0
+\caption{Cyclone V GT}
+\fi
+\fi
+\ifnum\XILINX=1
+\ifnum\INTEL=0
+\caption{Kintex Ultrascale}
+\fi
+\fi
 \end{table}
