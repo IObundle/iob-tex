@@ -64,22 +64,39 @@ def swreg_parse (program, defines) :
                     flds_out[1] = 'R/W'
                 elif '_W' in flds[0]:
                     flds_out[1] = 'W'
+                elif '_BANKR' in flds[0]:
+                    flds_out[1] = 'R'
+                elif '_BANKW' in flds[0]:
+                    flds_out[1] = 'W'
                 else:
                     flds_out[1] = 'R'
 
                 flds_out[2] = ("0x{:0" + str(addr_w) + "x}").format(swreg_addr) #register addr
-                swreg_addr = swreg_addr+4
+                
+                if '_BANK' in flds[0]:
+                    swreg_addr = swreg_addr + int(flds[4])/4
+                else:
+                    swreg_addr = swreg_addr+4
                 for key, val in defines.items():
                     if key in str(flds[2]):
                         flds[2] = eval(re.sub(str(key),str(val), flds[2]))
 
-                if flds[2].isdigit():
-                    flds_out[3] = str(int(flds[2])-1) + ":0" #register width
+                if '_BANK' in flds[0]:
+                    if flds[2].isdigit():
+                        flds_out[3] = str(int(flds[2])*int(flds[4])-1) + ":0" #register width
+                    else:
+                        flds_out[3] = re.sub('_', '\_', '('+str(flds[2]))+'*'+str(flds[4])+')'+ "-1:0" #register width 
                 else:
-                    flds_out[3] = re.sub('_', '\_', str(flds[2])) + "-1:0" #register width
+                    if flds[2].isdigit():
+                        flds_out[3] = str(int(flds[2])-1) + ":0" #register width
+                    else:
+                        flds_out[3] = re.sub('_', '\_', str(flds[2])) + "-1:0" #register width
 
                 flds_out[4] = flds[3] #reset value
-                flds_out[5] = re.sub('_','\_', string.join(flds[4:])) #register description
+                if '_BANK' in flds[0]:
+                    flds_out[5] = re.sub('_','\_', string.join(flds[5:])) #register description4
+                else:
+                    flds_out[5] = re.sub('_','\_', string.join(flds[4:])) #register description
 
                 program_out.append(flds_out)
 
