@@ -1,6 +1,10 @@
 \begin{table}[H]
 \ifnum\XILINX=1
-\begin{minipage}{.45\linewidth}
+\ifnum\INTEL=1
+\begin{minipage}{0.45\linewidth}
+\else
+\begin{minipage}{\linewidth}
+\fi
 \centering
 \begin{tabular}{|l|r|}
 \hline
@@ -13,7 +17,11 @@
 \end{minipage}
 \fi
 \ifnum\INTEL=1
-\begin{minipage}{.45\linewidth}
+\ifnum\XILINX=1
+\begin{minipage}{0.45\linewidth}
+\else
+\begin{minipage}{\linewidth}
+\fi
 \centering
 \begin{tabular}{|l|r|}
 \hline
@@ -39,4 +47,3 @@
 \fi
 \fi
 \end{table}
-
