@@ -29,14 +29,14 @@ fpga_res:
 	echo $(IS_CORE)
 ifeq ($(XILINX),1)
 ifeq ($(IS_CORE),1)
-	cp $($(CORE_NAME)_HW_DIR)/fpga/vivado/$(FPGA_FAMILY)/vivado.log .
+	cp $($(CORE_NAME)_HW_DIR)/fpga/vivado/$(XIL_FAMILY)/vivado.log .
 else
 	cp $(HW_DIR)/fpga/AES-KU040-DB-G/vivado.log .
 endif
 endif
 ifeq ($(INTEL),1)
 ifeq ($(IS_CORE),1)
-	cp $($(CORE_NAME)_HW_DIR)/fpga/quartus/CYCLONEV-GT/quartus.log .
+	cp $($(CORE_NAME)_HW_DIR)/fpga/quartus/$(INT_FAMILY)/quartus.log .
 else
 	cp $(HW_DIR)/fpga/CYCLONEV-GT-DK/top_system.fit.summary quartus.log
 endif
