@@ -43,6 +43,19 @@ endif
 endif
 	$(EXPORT_LIST) $(TEX_SW_DIR)/fpga2tex.sh
 
+
+gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+cpu_nat_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_nat_s_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+cpu_axi4lite_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_axi4lite_s_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+sw_reg_tab.tex: $($(CORE_NAME)_DIR)/hardware/include/$(CORE_NAME)sw_reg.v
+	$(TEX_SW_DIR)/swreg2tex.py $<
+
 texclean:
 	@rm -f *~ *.aux *.out *.log *.summary 
 	@rm -f *.lof *.toc *.fdb_latexmk  ug.fls  *.lot *.txt
