@@ -66,7 +66,7 @@ texclean:
 	@rm -f $(TEX_SRC) $(addprefix ../figures/, $(TEX_FIG))
 
 resultsclean:
-	@rm *_results*
+	@rm -f *_results*
 
 pdfclean: clean
 	@rm -f *.pdf
