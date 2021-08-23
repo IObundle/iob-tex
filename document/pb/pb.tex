@@ -5,7 +5,6 @@
 %\def\INTEL{1}
 
 \usepackage{color,soul}
-%\usepackage{array}
 \usepackage{float}
 \usepackage{makecell}
 \usepackage{lipsum}
@@ -14,9 +13,9 @@
 \usepackage{eso-pic}
 \graphicspath{{./figures/}}
 
-\title{IOB-TEX}
-\category{Example Product Brief}
-\confidential{}
+\input{../title}
+\category{Product Brief}
+%\confidential{}
 
 \newcommand\BackgroundPic{%
 \put(0,0){%
@@ -28,32 +27,29 @@ keepaspectratio]{bg.pdf}%
 \vfill
 }}}
 
-
 %\getenv[\TEX]{TEX_DIR}
 \input{\TEX/color}
 
 \begin{document}
 \AddToShipoutPicture*{\BackgroundPic}
 
-\section*{\textcolor[rgb]{0,0,0}{Overview}}
+\section*{Overview}
 \input{../intro}
 
-\section*{\textcolor[rgb]{0,0,0}{Features}}
+\section*{Features}
 \input{../features}
 
-\section*{\textcolor[rgb]{0,0,0}{Benefits}}
-\input{../benefits}
+\section*{Benefits}
+\input{\TEX/benefits}
 
-\section*{\textcolor[rgb]{0,0,0}{Deliverables}}
-\input{../deliverables}
+\section*{Deliverables}
+\input{\TEX/deliverables}
 
-
-\section*{\textcolor[rgb]{0,0,0}{Block Diagram}}
-\input{../bd}
+\section*{Block Diagram}
+\input{\TEX/bd}
 
 \section*{FPGA Resources}
 \input{\TEX/fpga}
 
-\input{\TEX/disclaimer}
 
 \end{document}

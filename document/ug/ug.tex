@@ -6,15 +6,14 @@
 \usepackage{amsthm}
 %\usepackage[T1]{helvet}
 \usepackage[OT1]{fontenc} 
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
+\graphicspath{ {./figures/} }
 
-\theoremstyle{plain}
-\newtheorem*{defn*}{Definition}
-\newtheorem*{ex*}{Example}
-
-
-\title{IObundle Example User Guide}
-\category{User Guide}
+\input{../title}
+\category{User Guide, \input{version.txt}, Build \input{shortHash.txt}}
+%\confidential{}
 
 %\getenv[\TEX]{TEX_DIR}
 \input{\TEX/color}
@@ -23,65 +22,45 @@
 \maketitle
 \cleardoublepage
 \tableofcontents
-\clearpage
 \listoftables
-\clearpage
 \listoffigures
 \cleardoublepage
 
-\section{\textcolor[rgb]{0,0,0}{Introduction}}
+\section{Introduction}
 \input{../intro}
 
 \section{Symbol}
-\input{../symb}
+\input{\TEX/symb}
 
 \section{\textcolor[rgb]{0,0,0}{Features}}
 \input{../features}
 
 \section{\textcolor[rgb]{0,0,0}{Benefits}}
-\input{../benefits}
+\input{\TEX/benefits}
 
 \section{\textcolor[rgb]{0,0,0}{Deliverables}}
-\input{../deliverables}
+\input{\TEX/deliverables}
 
-\section*{\textcolor[rgb]{0,0,0}{Block Diagram}}
-\input{../bd}
+\section{\textcolor[rgb]{0,0,0}{Block Diagram and Description}}
+\input{\TEX/ug/bdd}
+
+\section{\textcolor[rgb]{0,0,0}{Synthesis Parameters}}
+\input{\TEX/ug/sp}
 
 \section{Interface Signals}
-
-\begin{table}[H]
-  \begin{center}
-    \begin{tabular}{|l|l|p{8cm}|}
-      \hline
-      \rowcolor{iob-green}
-      \textbf{Signal} & \textbf{Direction} & \textbf{Description} \\
-      \hline
-      \hline
-
-     % \input is_tab.tex
-
-    \end{tabular}
-    \caption{General interface signals}
-    \label{tab:is}
-  \end{center}
-\end{table}
-
+\input{\TEX/ug/is}
 
 \section{Timing Diagrams}
+\input{td}
 
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=16cm]{spi.png}
-    \caption{SPI slave interface timing diagram}
-    \label{fig:spi}
-  \end{center}
-\end{figure}
+\section{Registers}
+\input{\TEX/ug/sw_reg}
 
 \section{Software Components}
+\input{sw}
 
 \section*{FPGA Resources}
 \input{\TEX/fpga}
-
 
 %\bibliographystyle{unsrt}
 %\bibliography{rep}

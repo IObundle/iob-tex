@@ -15,17 +15,17 @@ REG_TAB:=sw_reg_tab.tex
 
 BD_TAB:=bd_tab.tex
 
-SRC:=ug.tex $(wildcard ./*.tex) $(wildcard ../*.tex)  $(IS_TAB) $(REG_TAB) $(BD_TAB)
+SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)  $(IS_TAB) $(REG_TAB) $(BD_TAB)
 
 TD_FIGS:= #list figures here
 
 
-pb.pdf: pb.tex figures fpga_res
+pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	evince $@ &
 
-ug.pdf: $(SRC) figures fpga_res $(CORE_NAME)_version.txt
+ug.pdf: $(TEX)/ug/ug.tex $(SRC) figures fpga_res $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
