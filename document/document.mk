@@ -21,6 +21,7 @@ TD_FIGS:= #list figures here
 
 
 pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
+	cp -u $(TEX_DIR)/document/pb/pb.cls .
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	$(EXPORT_LIST) pdflatex '\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}\input{$<}'
 	evince $@ &
@@ -76,7 +77,7 @@ resultsclean:
 	@rm -f *_results*
 
 clean: texclean resultsclean
-	@rm -rf figures
+	@rm -rf figures *.cls
 	@rm -f $(IS_TAB) $(REG_TAB) $(BD_TAB)
 
 .PHONY:  figures fpga_res texclean resultsclean clean
