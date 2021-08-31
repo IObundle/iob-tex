@@ -19,6 +19,7 @@ SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)  $(IS_TAB) $(REG_TAB) $(BD_TAB)
 
 TD_FIGS:= #list figures here
 
+all: $(DOC).pdf
 
 pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
 	cp -u $(TEX_DIR)/document/pb/pb.cls .
@@ -80,4 +81,4 @@ clean: texclean resultsclean
 	@rm -rf figures *.cls
 	@rm -f $(IS_TAB) $(REG_TAB) $(BD_TAB)
 
-.PHONY:  figures fpga_res texclean resultsclean clean
+.PHONY:  all figures fpga_res texclean resultsclean clean
