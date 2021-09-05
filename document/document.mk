@@ -55,7 +55,7 @@ ifeq ($(INTEL),1)
 endif
 	$(EXPORT_LIST) $(TEX_SW_DIR)/fpga2tex.sh
 
-bd_tab.tex: $(UART_HW_DIR)/src/iob_uart.v $(UART_HW_DIR)/src/$(BD_VSRC)
+bd_tab.tex: $(CORE_DIR)/hardware/src/$(BD_VSRC)
 	$(TEX_SW_DIR)/block2tex.py $@ $^
 
 gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
