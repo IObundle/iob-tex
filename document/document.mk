@@ -7,9 +7,10 @@ XILINX=$(XILINX)\
 
 TEX:=$(TEX_DIR)/document
 TEX_SW_DIR:=$(TEX_DIR)/software
+TEX_DOC_DIR:=$(TEX_DIR)/document
 
 
-IS_TAB += gen_is_tab.tex cpu_nat_s_is_tab.tex cpu_axi4lite_s_is_tab.tex
+IS_TAB += gen_is_tab.tex
 
 REG_TAB:=sw_reg_tab.tex
 
@@ -19,7 +20,7 @@ SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)  $(IS_TAB) $(REG_TAB) $(BD_TAB)
 
 TD_FIGS:= #list figures here
 
-all: $(DOC).pdf
+all: $(IS_TAB) $(DOC).pdf
 
 pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
 	cp -u $(TEX_DIR)/document/pb/pb.cls .
@@ -53,17 +54,10 @@ ifeq ($(INTEL),1)
 endif
 	$(EXPORT_LIST) $(TEX_SW_DIR)/fpga2tex.sh
 
+bd_tab.tex: $(UART_HW_DIR)/src/iob_uart.v $(UART_HW_DIR)/src/$(BD_VSRC)
+	$(TEX_SW_DIR)/block2tex.py $@ $^
 
 gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
-	$(TEX_SW_DIR)/io2tex.py $< $@
-
-cpu_nat_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_nat_s_if.v
-	$(TEX_SW_DIR)/io2tex.py $< $@
-
-cpu_axi4_m_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_axi4_m_if.v
-	$(TEX_SW_DIR)/io2tex.py $< $@
-
-cpu_axi4lite_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_axi4lite_s_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
 sw_reg_tab.tex: $($(CORE_NAME)_DIR)/hardware/include/$(CORE_NAME)sw_reg.v
