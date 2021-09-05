@@ -9,7 +9,7 @@ TEX:=$(TEX_DIR)/document
 TEX_SW_DIR:=$(TEX_DIR)/software
 
 
-IS_TAB:=gen_is_tab.tex cpu_nat_s_is_tab.tex cpu_axi4lite_s_is_tab.tex rs232_is_tab.tex
+IS_TAB += gen_is_tab.tex cpu_nat_s_is_tab.tex cpu_axi4lite_s_is_tab.tex
 
 REG_TAB:=sw_reg_tab.tex
 
