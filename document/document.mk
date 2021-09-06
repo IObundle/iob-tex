@@ -9,27 +9,31 @@ TEX_SW_DIR:=$(TEX_DIR)/software
 TEX_DOC_DIR:=$(TEX_DIR)/document
 
 #latex build macros
-SP ?= 0
-SWREGS ?= 1
-SWCOMPS ?= 0
-TD ?= 0
-
+BDTAB ?=1
+SP ?=0
+SWREGS ?=1
+SWCOMPS ?=0
+TD ?=0
 
 TEX_DEFINES=\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}
 TEX_DEFINES +=\def\SP{$(SP)}\def\SWREGS{$(SWREGS)}\def\SWCOMPS{$(SWCOMPS)}
 TEX_DEFINES +=\def\TD{$(TD)}
 
-#add block digram table to th elist of tables
-TAB +=bd_tab.tex
-
 #add general interface signals to the list of tables
 TAB +=gen_is_tab.tex
 
-ifneq ($(SP),)
+#add block diagram table to the list of tables
+ifeq ($(BDTAB),1)
+TAB +=bd_tab.tex
+endif
+
+#add synthesis parameters table to the list of tables
+ifeq ($(SP),1)
 TAB +=sp_tab.tex
 endif
 
-ifneq ($(SWREGS),)
+#add software accessible registers table to the list of tables
+ifeq ($(SWREGS),1)
 TAB +=sw_reg_tab.tex
 endif 
 
