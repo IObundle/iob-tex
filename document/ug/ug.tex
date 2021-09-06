@@ -31,32 +31,41 @@
 \section{Symbol}
 \input{\TEX/symb}
 
-\section{\textcolor[rgb]{0,0,0}{Features}}
-\input{../features}
+\section{Features}
+\input{\TEX/features}
 
-\section{\textcolor[rgb]{0,0,0}{Benefits}}
+\section{Benefits}
 \input{\TEX/benefits}
 
-\section{\textcolor[rgb]{0,0,0}{Deliverables}}
+\section{Deliverables}
 \input{\TEX/deliverables}
 
-\section{\textcolor[rgb]{0,0,0}{Block Diagram and Description}}
+\section{Block Diagram and Description}
 \input{\TEX/ug/bdd}
-
-\section{\textcolor[rgb]{0,0,0}{Synthesis Parameters}}
-\input{\TEX/ug/sp}
 
 \section{Interface Signals}
 \input{\TEX/ug/is}
 
-\section{Timing Diagrams}
-\input{td}
+%synthesis parameters
+\ifnum\SP=1
+\input{\TEX/ug/sp}
+\fi
 
-\section{Registers}
+
+%software accessible registers
+\ifnum\SWREGS=1
 \input{\TEX/ug/sw_reg}
+\fi
+
+%timing digrams
+\ifnum\TD=1
+\input{\TEX/td}
+\fi
 
 \section{Software Components}
+\ifnum\SWCOMPS=1
 \input{sw}
+\fi
 
 \section*{FPGA Resources}
 \input{\TEX/fpga}

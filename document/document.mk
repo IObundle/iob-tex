@@ -1,27 +1,42 @@
-XIL_LOG=vivado.log
-INT_LOG=quartus.log
-
+#this may be unnecessary. don't these vars get exported anyway?
 EXPORT_LIST=\
 INTEL=$(INTEL)\
 XILINX=$(XILINX)\
 
+#paths
 TEX:=$(TEX_DIR)/document
 TEX_SW_DIR:=$(TEX_DIR)/software
 TEX_DOC_DIR:=$(TEX_DIR)/document
 
+#latex build macros
+SP ?= 0
+SWREGS ?= 1
+SWCOMPS ?= 0
+TD ?= 0
+
+
 TEX_DEFINES=\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}
+TEX_DEFINES +=\def\SP{$(SP)}\def\SWREGS{$(SWREGS)}\def\SWCOMPS{$(SWCOMPS)}
+TEX_DEFINES +=\def\TD{$(TD)}
 
-IS_TAB += gen_is_tab.tex
+#add block digram table to th elist of tables
+TAB +=bd_tab.tex
 
-REG_TAB:=sw_reg_tab.tex
+#add general interface signals to the list of tables
+TAB +=gen_is_tab.tex
 
-BD_TAB:=bd_tab.tex
+ifneq ($(SP),)
+TAB +=sp_tab.tex
+endif
 
-SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)  $(IS_TAB) $(REG_TAB) $(BD_TAB)
+ifneq ($(SWREGS),)
+TAB +=sw_reg_tab.tex
+endif 
 
-TD_FIGS:= #list figures here
 
-all: $(IS_TAB) $(DOC).pdf
+SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex) $(TAB)
+
+all: $(TAB) $(DOC).pdf
 
 pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
 	cp -u $(TEX_DIR)/document/pb/pb.cls .
@@ -46,6 +61,7 @@ figures:
 	cp -u ../figures/* ./figures
 	make -C ./figures
 
+#FPGA implementation results
 fpga_res:
 ifeq ($(XILINX),1)
 	cp $(CORE_DIR)/hardware/fpga/vivado/$(XIL_FAMILY)/vivado.log .
@@ -55,15 +71,24 @@ ifeq ($(INTEL),1)
 endif
 	$(EXPORT_LIST) $(TEX_SW_DIR)/fpga2tex.sh
 
+
+#block diagram
 bd_tab.tex: $(CORE_DIR)/hardware/src/$(BD_VSRC)
 	$(TEX_SW_DIR)/block2tex.py $@ $^
 
+#synthesis parameters
+sp_tab.tex: $(CORE_DIR)/hardware/src/$(TOP_MODULE).v
+	$(TEX_SW_DIR)/param2tex.py $< $@ $(CORE_DIR)/hardware/include/$(TOP_MODULE).vh
+
+#sw accessible registers
+sw_reg_tab.tex: $(CORE_DIR)/hardware/include/$(CORE_NAME)sw_reg.v
+	$(TEX_SW_DIR)/swreg2tex.py $< 
+
+#general interface signals (clk and rst)
 gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
-sw_reg_tab.tex: $($(CORE_NAME)_DIR)/hardware/include/$(CORE_NAME)sw_reg.v
-	$(TEX_SW_DIR)/swreg2tex.py $<
-
+#cleaning
 texclean:
 	@rm -f *~ *.aux *.out *.log *.summary 
 	@rm -f *.lof *.toc *.fdb_latexmk  ug.fls  *.lot *.txt
@@ -72,6 +97,6 @@ resultsclean:
 	@rm -f *_results*
 
 clean: texclean resultsclean
-	@rm -rf figures *.cls $(IS_TAB) $(REG_TAB) $(BD_TAB)
+	@rm -rf figures *.cls $(TAB)
 
 .PHONY:  all figures fpga_res texclean resultsclean clean

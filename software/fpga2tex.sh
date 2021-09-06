@@ -18,7 +18,7 @@ echo "\rowcolor{iob-blue}"  >> $RES ;\
 echo "BRAM blocks & $BRAM \\\\ \\hline"  >> $RES ;\
 echo "BRAM bits & $BRAMb \\\\ \\hline"  >> $RES ;\
 echo "\rowcolor{iob-blue}"  >> $RES ;\
-if [ $IS_CORE != 1 ]; then \
+if [ $PIN ]; then \
 echo "PIN & $PIN \\\\ \\hline"  >> $RES ;\
 fi \
 fi
@@ -39,7 +39,7 @@ echo "$FF  \\\\  \\hline" >> $RES ;\
 echo "$DSP \\\\ \\hline" >> $RES ;\
 echo "\rowcolor{iob-blue}" >> $RES ;\
 echo "$BRAM \\\\ \\hline" >> $RES ;\
-if [ $IS_CORE != 1 ]; then \
+if [ $PIN ]; then \
 echo "$PIN \\\\ \\hline" >> $RES ;\
 fi \
 fi
