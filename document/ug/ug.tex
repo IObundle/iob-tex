@@ -7,6 +7,11 @@
 %\usepackage[T1]{helvet}
 \usepackage[OT1]{fontenc} 
 \usepackage{array}
+\usepackage[binary-units=true]{siunitx}
+\usepackage{subcaption}
+\usepackage{caption,tabularx,booktabs}
+
+
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 \graphicspath{ {./figures/} }
@@ -68,6 +73,10 @@
 
 \section*{FPGA Resources}
 \input{\TEX/fpga}
+
+\ifnum\CUSTOM=1
+\input{custom}
+\fi
 
 %\bibliographystyle{unsrt}
 %\bibliography{rep}

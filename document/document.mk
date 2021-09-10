@@ -14,10 +14,11 @@ SP ?=0
 SWREGS ?=1
 SWCOMPS ?=0
 TD ?=0
+CUSTOM ?= 0
 
 TEX_DEFINES=\def\TEX{$(TEX)}\def\XILINX{$(XILINX)}\def\INTEL{$(INTEL)}
 TEX_DEFINES +=\def\SP{$(SP)}\def\SWREGS{$(SWREGS)}\def\SWCOMPS{$(SWCOMPS)}
-TEX_DEFINES +=\def\TD{$(TD)}
+TEX_DEFINES +=\def\TD{$(TD)}\def\CUSTOM{$(CUSTOM)}
 
 #add general interface signals to the list of tables
 TAB +=gen_is_tab.tex
@@ -50,6 +51,9 @@ pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
 
 ug.pdf: $(TEX)/ug/ug.tex $(SRC) figures fpga_res $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
+ifeq ($(CUSTOM),1)
+	make custom
+endif
 	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
 	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
@@ -93,14 +97,8 @@ gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
 #cleaning
-texclean:
-	@rm -f *~ *.aux *.out *.log *.summary 
-	@rm -f *.lof *.toc *.fdb_latexmk  ug.fls  *.lot *.txt
+clean: ug-clean
+	@find . -type f -not \( $(NOCLEAN) \) -delete
+	@rm -rf figures
 
-resultsclean:
-	@rm -f *_results*
-
-clean: texclean resultsclean
-	@rm -rf figures *.cls $(TAB)
-
-.PHONY:  all figures fpga_res texclean resultsclean clean
+.PHONY:  all figures fpga_res ug-clean clean
