@@ -41,15 +41,15 @@ endif
 
 SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex) $(TAB)
 
-all: $(TAB) $(DOC).pdf
+all: $(DOC).pdf
 
-pb.pdf: $(TEX)/pb/pb.tex figures fpga_res
+pb.pdf: $(TEX)/pb/pb.tex figures fpga_res $(TAB)
 	cp -u $(TEX_DIR)/document/pb/pb.cls .
 	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
 	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 
-ug.pdf: $(TEX)/ug/ug.tex $(SRC) figures fpga_res $(CORE_NAME)_version.txt
+ug.pdf: $(TEX)/ug/ug.tex $(SRC) figures fpga_res $(TAB) $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
 ifeq ($(CUSTOM),1)
 	make custom
