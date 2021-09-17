@@ -1,12 +1,6 @@
-#this may be unnecessary. don't these vars get exported anyway?
-EXPORT_LIST=\
-INTEL=$(INTEL)\
-XILINX=$(XILINX)\
-
 #paths
 TEX:=$(TEX_DIR)/document
 TEX_SW_DIR:=$(TEX_DIR)/software
-TEX_DOC_DIR:=$(TEX_DIR)/document
 
 #latex build macros
 BDTAB ?=1
@@ -41,31 +35,31 @@ endif
 
 SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex) $(TAB)
 
-all: $(DOC).pdf
+all: figures $(DOC).pdf
 
-pb.pdf: $(TEX)/pb/pb.tex figures fpga_res $(TAB)
-	cp -u $(TEX_DIR)/document/pb/pb.cls .
-	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
-	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
+pb.pdf: $(TEX)/pb/pb.tex fpga_res $(TAB)
+	cp -u $(TEX)/pb/pb.cls .
+	pdflatex '$(TEX_DEFINES)\input{$<}'
+	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 
-ug.pdf: $(TEX)/ug/ug.tex $(SRC) figures fpga_res $(TAB) $(CORE_NAME)_version.txt
+ug.pdf: $(TEX)/ug/ug.tex $(SRC) fpga_res $(TAB) $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
 ifeq ($(CUSTOM),1)
 	make custom
 endif
-	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
-	$(EXPORT_LIST) pdflatex '$(TEX_DEFINES)\input{$<}'
+	pdflatex '$(TEX_DEFINES)\input{$<}'
+	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 
-presentation.pdf: presentation.tex figures
+presentation.pdf: presentation.tex
 	pdflatex $<
 	pdflatex $<
 	evince $@ &
 
 figures:
 	mkdir -p ./figures
-	cp -u $(TEX_DIR)/document/figures/* ./figures
+	cp -u $(TEX)/figures/* ./figures
 	cp -u ../figures/* ./figures
 	make -C ./figures
 
@@ -77,7 +71,7 @@ endif
 ifeq ($(INTEL),1)
 	cp $(CORE_DIR)/hardware/fpga/quartus/$(INT_FAMILY)/quartus.log .
 endif
-	$(EXPORT_LIST) $(TEX_SW_DIR)/fpga2tex.sh
+	INTEL=$(INTEL) XILINX=$(XILINX) $(TEX_SW_DIR)/fpga2tex.sh
 
 
 #block diagram
