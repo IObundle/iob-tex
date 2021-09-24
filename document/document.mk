@@ -49,6 +49,8 @@ ifeq ($(CUSTOM),1)
 	make custom
 endif
 	pdflatex '$(TEX_DEFINES)\input{$<}'
+	bibtex ug
+	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 

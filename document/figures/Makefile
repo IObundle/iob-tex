@@ -16,7 +16,7 @@ $(error LibreOffice is running. Close it before proceeding.)
 endif
 
 #make wavedrom figures
-$(WD_FIGS): %.pdf : ../wavedrom/%.drom
+$(WD_FIGS): %.pdf : ../figures/%.drom
 	npx wavedrom-cli -i $< -s temp.svg
 	inkscape --file temp.svg --export-pdf $@
 	rm -f temp.svg
