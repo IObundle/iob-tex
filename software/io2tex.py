@@ -54,9 +54,7 @@ def main () :
     defines = {}
     if 'vhfile' in locals():
         #Create header dictionary
-        fvh = open(vhfile, 'r')
-        defines = header_parse(fvh)
-        fvh.close()
+        defines = header_parse(vhfile)
         
     #parse input file
     fin = open (infile, 'r')
