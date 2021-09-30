@@ -33,17 +33,17 @@ TAB +=sw_reg_tab.tex
 endif 
 
 
-SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex) $(TAB)
+SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)
 
-all: figures $(DOC).pdf
+all: figures fpga_res $(TAB) $(DOC).pdf
 
-pb.pdf: $(TEX)/pb/pb.tex fpga_res $(TAB)
+pb.pdf: $(TEX)/pb/pb.tex
 	cp -u $(TEX)/pb/pb.cls .
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 
-ug.pdf: $(TEX)/ug/ug.tex $(SRC) fpga_res $(TAB) $(CORE_NAME)_version.txt
+ug.pdf: $(TEX)/ug/ug.tex $(SRC) $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
 ifeq ($(CUSTOM),1)
 	make custom
