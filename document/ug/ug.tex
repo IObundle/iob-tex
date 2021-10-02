@@ -11,7 +11,9 @@
 \usepackage{subcaption}
 \usepackage{caption,tabularx,booktabs}
 \usepackage{longtable}
-
+\usepackage[all]{nowidow}
+\widowpenalty10000
+\clubpenalty10000
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -57,7 +59,7 @@
 \section{Interface Signals}
 \input{\TEX/ug/is}
 
-%timing digrams
+%timing diagrams
 \ifnum\TD=1
 \input{\TEX/td}
 \fi
@@ -72,6 +74,7 @@
 \input{sw}
 \fi
 
+\section{Implementation Results}
 \input{../results}
 
 \ifnum\CUSTOM=1

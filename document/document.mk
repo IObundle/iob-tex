@@ -37,7 +37,7 @@ SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)
 
 all: figures fpga_res $(TAB) $(DOC).pdf
 
-pb.pdf: $(TEX)/pb/pb.tex
+pb.pdf: $(TEX)/pb/pb.tex $(SRC)
 	cp -u $(TEX)/pb/pb.cls .
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
