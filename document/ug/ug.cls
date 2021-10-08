@@ -25,7 +25,7 @@
 }
 
 \pagestyle{fancy}
-\graphicspath{ {../figures/} {../figures/png/} }
+\graphicspath{ {./figures} }
 \setlength{\parskip}{\baselineskip}
 
 
