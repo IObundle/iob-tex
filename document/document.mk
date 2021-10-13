@@ -37,13 +37,13 @@ SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)
 
 all: figures fpga_res $(TAB) $(DOC).pdf
 
-pb.pdf: $(TEX)/pb/pb.tex $(SRC)
+pb.pdf: $(TEX)/pb/pb.tex $(SRC) $(TAB)
 	cp -u $(TEX)/pb/pb.cls .
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 
-ug.pdf: $(TEX)/ug/ug.tex $(SRC) $(CORE_NAME)_version.txt
+ug.pdf: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(CORE_NAME)_version.txt
 	git rev-parse --short HEAD > shortHash.txt
 ifeq ($(CUSTOM),1)
 	make custom
