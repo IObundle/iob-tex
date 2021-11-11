@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3
 #
 #    Build Latex tables of verilog module interface signals and registers
 #
@@ -94,9 +94,9 @@ def swreg_parse (program, defines) :
 
                 flds_out[4] = flds[3] #reset value
                 if '_BANK' in flds[0]:
-                    flds_out[5] = re.sub('_','\_', string.join(flds[5:])) #register description4
+                    flds_out[5] = re.sub('_','\_', " ".join(flds[5:])) #register description4
                 else:
-                    flds_out[5] = re.sub('_','\_', string.join(flds[4:])) #register description
+                    flds_out[5] = re.sub('_','\_', " ".join(flds[4:])) #register description
 
                 program_out.append(flds_out)
 

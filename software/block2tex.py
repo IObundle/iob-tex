@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3
 #
 #    Build Latex tables of verilog module interface signals and registers
 #
@@ -6,7 +6,6 @@
 import sys
 import os.path
 import re
-import string
 
 def block_parse (program) :
     program_out = []
@@ -21,7 +20,7 @@ def block_parse (program) :
         if (flds[0] != '//BLOCK'): continue #not a block description
         #print flds
 
-        flds_out[0] = re.sub('_','\_',string.join(flds[1:])) + " \\vspace{2mm}" #block
+        flds_out[0] = re.sub('_','\_'," ".join(flds[1:])) + " \\vspace{2mm}" #block
 
         program_out.append(flds_out)
 
@@ -30,7 +29,7 @@ def block_parse (program) :
 def main () :
     #parse command line
     if len(sys.argv) < 3:
-        print("Usage: ./v2tex.py outfile [infiles]")
+        print("Usage: ./block2tex.py outfile [infiles]")
         exit()
     else:
         outfile = sys.argv[1]

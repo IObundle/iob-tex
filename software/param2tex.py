@@ -6,7 +6,6 @@
 import sys
 import os.path
 import re
-import string
 
 from vhparser import header_parse
 
@@ -28,7 +27,7 @@ def param_parse (program, vhfile) :
         #print flds[0]
         if (flds[0] != 'parameter'): continue #not a block description
         #print flds
-        param_desc = str(re.sub('_','\_', string.join(flds[3:])))
+        param_desc = str(re.sub('_','\_', " ".join(flds[3:])))
         if param_desc.startswith("NODOC"): continue #undocummented parameter
 
         flds_out[0] = re.sub('_','\_', flds[1]) #parameter name
@@ -50,7 +49,7 @@ def param_parse (program, vhfile) :
 def main () :
     #parse command line
     if len(sys.argv) != 3 and len(sys.argv) != 4:
-        print("Usage: ./v2tex.py infile outfile [header_file]")
+        print("Usage: ./param2tex.py infile outfile [header_file]")
         exit()
     else:
         infile = sys.argv[1]

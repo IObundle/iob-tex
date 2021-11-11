@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3
 #
 #    Add defines from .vh to local dictionary
 #
@@ -6,7 +6,6 @@
 import sys
 import os.path
 import re
-import string
 
 def header_parse (vhfile):
     f = open(vhfile, 'r')
