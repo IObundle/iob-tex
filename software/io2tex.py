@@ -6,7 +6,6 @@
 import sys
 import os.path
 import re
-import string
 import math
 
 from vhparser import header_parse
@@ -25,7 +24,7 @@ def io_parse (program, defines) :
         #print flds[0]
         if (flds[0] != '`INPUT') & (flds[0] != '`OUTPUT') & (flds[0] != '`INOUT'): continue #not IO
         #print flds
-        flds_out[1] = string.lower(re.sub('`','', flds[0])) #signal direction
+        flds_out[1] = re.sub('`','', flds[0]).lower() #signal direction
 
         flds_out[0] = re.sub('_','\_',flds[1]) #signal name
         for key, val in defines.items():
@@ -33,7 +32,7 @@ def io_parse (program, defines) :
                 flds[2] = eval(re.sub(str(key),str(val), flds[2]))
             pass
         flds_out[2] = re.sub('_', '\_', str(flds[2]))  #signal width
-        flds_out[3] = re.sub('_','\_',string.join(flds[3:])) #signal description
+        flds_out[3] = re.sub('_','\_'," ".join(flds[3:])) #signal description
 
         program_out.append(flds_out)
 
