@@ -43,13 +43,17 @@ pb.pdf: $(TEX)/pb/pb.tex $(SRC) $(TAB)
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
 
-ug.pdf: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(CORE_NAME)_version.txt
+ug.pdf: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(MODULE)_version.txt
+	echo $(TAB)
+	exit
 	git rev-parse --short HEAD > shortHash.txt
 ifeq ($(CUSTOM),1)
 	make custom
 endif
 	pdflatex '$(TEX_DEFINES)\input{$<}'
+ifeq ($(BIB),1)
 	bibtex ug
+endif
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	evince $@ &
@@ -85,11 +89,23 @@ sp_tab.tex: $(CORE_DIR)/hardware/src/$(TOP_MODULE).v
 	$(TEX_SW_DIR)/param2tex.py $< $@ $(CORE_DIR)/hardware/include/$(TOP_MODULE).vh
 
 #sw accessible registers
-sw_reg_tab.tex: $(CORE_DIR)/hardware/include/$(CORE_NAME)sw_reg.v
+sw_reg_tab.tex: $(CORE_DIR)/hardware/include/$(MODULE)sw_reg.v
 	$(TEX_SW_DIR)/swreg2tex.py $< 
 
 #general interface signals (clk and rst)
 gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+cpu_nat_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_nat_s_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+cpu_nat_m_if.v: $(INTERCON_DIR)/hardware/include/cpu_nat_m_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+cpu_axi4lite_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_axi4lite_s_if.v
+	$(TEX_SW_DIR)/io2tex.py $< $@
+
+cpu_axi4_m_if.v:  $(INTERCON_DIR)/hardware/include/cpu_axi4_m_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
 #cleaning
