@@ -37,13 +37,18 @@ SRC:= $(wildcard ./*.tex) $(wildcard ../*.tex)
 
 all: figures fpga_res $(TAB) $(DOC).pdf
 
-pb.pdf: $(TEX)/pb/pb.tex $(SRC) $(TAB)
+pb.pdf: pb.aux
+	evince $@ &
+
+pb.aux: $(TEX)/pb/pb.tex $(SRC) $(TAB)
 	cp -u $(TEX)/pb/pb.cls .
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
+
+ug.pdf: ug.aux
 	evince $@ &
 
-ug.pdf: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(MODULE)_version.txt
+ug.aux: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(MODULE)_version.txt
 	echo $(TAB)
 	exit
 	git rev-parse --short HEAD > shortHash.txt
@@ -56,12 +61,13 @@ ifeq ($(BIB),1)
 endif
 	pdflatex '$(TEX_DEFINES)\input{$<}'
 	pdflatex '$(TEX_DEFINES)\input{$<}'
+
+presentation.pdf: presentation.aux
 	evince $@ &
 
-presentation.pdf: presentation.tex
+presentation.aux: presentation.tex
 	pdflatex $<
 	pdflatex $<
-	evince $@ &
 
 figures:
 	mkdir -p ./figures
