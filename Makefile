@@ -1,7 +1,4 @@
-TEX_DIR:=.
-include config.mk
-
 corename:
-	@echo $(MODULE)
+	@echo "TEX"
 
 .PHONY: corename
