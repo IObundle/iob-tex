@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #altera
 if [ $INTEL = 1 ]; then \
 LOG="quartus.log" ;\
