@@ -48,7 +48,7 @@ pb.aux: $(TEX)/pb/pb.tex $(SRC) $(TAB)
 ug.pdf: ug.aux
 	evince $@ &
 
-ug.aux: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(MODULE)_version.txt
+ug.aux: $(TEX)/ug/ug.tex $(SRC) $(TAB) $(TOP_MODULE)_version.txt
 	echo $(TAB)
 	exit
 	git rev-parse --short HEAD > shortHash.txt
@@ -95,7 +95,7 @@ sp_tab.tex: $(CORE_DIR)/hardware/src/$(TOP_MODULE).v
 	$(TEX_SW_DIR)/param2tex.py $< $@ $(CORE_DIR)/hardware/include/$(TOP_MODULE).vh
 
 #sw accessible registers
-sw_reg_tab.tex: $(CORE_DIR)/hardware/include/$(MODULE)sw_reg.v
+sw_reg_tab.tex: $(CORE_DIR)/hardware/include/$(TOP_MODULE)sw_reg.v
 	$(TEX_SW_DIR)/swreg2tex.py $< 
 
 #general interface signals (clk and rst)
