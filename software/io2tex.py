@@ -27,10 +27,13 @@ def io_parse (program, defines) :
         flds_out[1] = re.sub('`','', flds[0]).lower() #signal direction
 
         flds_out[0] = re.sub('_','\_',flds[1]) #signal name
-        for key, val in defines.items():
-            if key in str(flds[2]):
-                flds[2] = eval(re.sub(str(key),str(val), flds[2]))
-            pass
+        if flds[2] in defines:#check for matching key first
+            flds[2] = defines[flds[2]]
+        else: #macro composed by multiple defines
+            for key, val in defines.items():
+                if key in str(flds[2]):
+                    flds[2] = eval(re.sub(str(key),str(val), flds[2]))
+                pass
         flds_out[2] = re.sub('_', '\_', str(flds[2]))  #signal width
         flds_out[3] = re.sub('_','\_'," ".join(flds[3:])) #signal description
 
