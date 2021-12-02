@@ -118,5 +118,6 @@ cpu_axi4_m_if.v:  $(INTERCON_DIR)/hardware/include/cpu_axi4_m_if.v
 clean: ug-clean
 	@find . -type f -not \( $(NOCLEAN) \) -delete
 	@rm -rf figures
+	@rm -rf $(TEX_SW_DIR)/__pycache__/ $(TEX_SW_DIR)/*.pyc
 
 .PHONY:  all figures fpga_res ug-clean clean
