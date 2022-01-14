@@ -111,7 +111,7 @@ cpu_nat_m_if.v: $(INTERCON_DIR)/hardware/include/cpu_nat_m_if.v
 cpu_axi4lite_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_axi4lite_s_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
-cpu_axi4_m_if.v:  $(INTERCON_DIR)/hardware/include/cpu_axi4_m_if.v
+cpu_axi4_m_if_is_tab.tex:  $(INTERCON_DIR)/hardware/include/cpu_axi4_m_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
 #cleaning
