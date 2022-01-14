@@ -29,7 +29,8 @@ endif
 
 #add software accessible registers table to the list of tables
 ifeq ($(SWREGS),1)
-TAB +=sw_reg_tab.tex
+# expected sw_%reg table namming convention in CORENAMEsw_reg.v
+TAB +=$(shell grep START_TABLE $(I2S_TDM_DIR)/hardware/include/$(CORENAME)sw_reg.v | awk '{print $$2}' | sed s/$$/_tab.tex/)
 endif 
 
 
@@ -95,7 +96,7 @@ sp_tab.tex: $(CORE_DIR)/hardware/src/$(TOP_MODULE).v
 	$(TEX_SW_DIR)/param2tex.py $< $@ $(CORE_DIR)/hardware/include/$(TOP_MODULE).vh
 
 #sw accessible registers
-sw_reg_tab.tex: $(CORE_DIR)/hardware/include/$(CORENAME)sw_reg.v
+sw_%reg_tab.tex: $(CORE_DIR)/hardware/include/$(CORENAME)sw_reg.v
 	$(TEX_SW_DIR)/swreg2tex.py $< 
 
 #general interface signals (clk and rst)
