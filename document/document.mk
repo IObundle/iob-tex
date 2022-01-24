@@ -100,19 +100,19 @@ sw_%reg_tab.tex: $(CORE_DIR)/hardware/include/$(CORENAME)sw_reg.v
 	$(TEX_SW_DIR)/swreg2tex.py $< 
 
 #general interface signals (clk and rst)
-gen_is_tab.tex: $(INTERCON_DIR)/hardware/include/gen_if.v
+gen_is_tab.tex: $(LIB_DIR)/hardware/include/gen_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
-cpu_nat_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_nat_s_if.v
+cpu_nat_s_is_tab.tex: $(LIB_DIR)/hardware/include/cpu_nat_s_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
-cpu_nat_m_if.v: $(INTERCON_DIR)/hardware/include/cpu_nat_m_if.v
+cpu_nat_m_if.v: $(LIB_DIR)/hardware/include/cpu_nat_m_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
-cpu_axi4lite_s_is_tab.tex: $(INTERCON_DIR)/hardware/include/cpu_axi4lite_s_if.v
+cpu_axi4lite_s_is_tab.tex: $(LIB_DIR)/hardware/include/cpu_axi4lite_s_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
-cpu_axi4_m_if_is_tab.tex:  $(INTERCON_DIR)/hardware/include/cpu_axi4_m_if.v
+cpu_axi4_m_if_is_tab.tex:  $(LIB_DIR)/hardware/include/cpu_axi4_m_if.v
 	$(TEX_SW_DIR)/io2tex.py $< $@
 
 #cleaning
